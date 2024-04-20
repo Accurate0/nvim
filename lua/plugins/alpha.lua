@@ -125,7 +125,7 @@ return {
 
       local header = {
         type = 'text',
-        val = vim.fn.system { 'fortune', '-a', '-s' },
+        val = vim.fn.system { 'fortune', '-a', '-s', '-n', '50' },
         opts = {
           position = 'center',
         },
