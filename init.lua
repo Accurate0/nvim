@@ -26,6 +26,7 @@ require('lazy').setup({
   { require 'plugins.autoformat' },
   { require 'plugins.lint' },
   { require 'plugins.gitsigns' },
+  { require 'plugins.alpha' },
   { 'tpope/vim-sleuth' },
   { 'numToStr/Comment.nvim', opts = {} },
   {
