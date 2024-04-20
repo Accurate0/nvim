@@ -8,7 +8,9 @@ vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
+vim.diagnostic.config {
+  update_in_insert = true,
+}
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
