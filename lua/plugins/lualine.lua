@@ -5,12 +5,12 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        section_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
         component_separators = '|',
         disabled_filetypes = { 'packer', 'NvimTree', 'alpha', 'neo-tree' },
       },
       sections = {
-        lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
+        lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
         lualine_b = { 'branch' },
         lualine_c = {
           {
@@ -28,7 +28,7 @@ return {
           'filetype',
         },
         lualine_y = { 'progress' },
-        lualine_z = { { 'location', separator = { right = '' }, left_padding = 2 } },
+        lualine_z = { { 'location', separator = { right = '' } } },
       },
       inactive_sections = {
         lualine_a = {},
