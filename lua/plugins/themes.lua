@@ -4,4 +4,5 @@ return {
     'folke/tokyonight.nvim',
     priority = 1000,
   },
+  { 'loctvl842/monokai-pro.nvim', priority = 1000 },
 }
