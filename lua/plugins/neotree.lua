@@ -23,6 +23,8 @@ return {
             hide_gitignored = false,
             hide_by_name = {
               '.git',
+              'build',
+              'target',
             },
           },
         },
