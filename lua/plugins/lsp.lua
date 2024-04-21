@@ -7,6 +7,10 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       { 'folke/neodev.nvim', opts = {} },
+      {
+        'pmizio/typescript-tools.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+      },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -16,7 +20,21 @@ return {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          local bufnr = event.buf
+          local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+          if
+            filetype == 'typescript'
+            or filetype == 'typescriptreact'
+            or filetype == 'typescript.tsx'
+            or filetype == 'javascript'
+            or filetype == 'javascriptreact'
+          then
+            map('gd', require('typescript-tools.api').go_to_source_definition, bufnr)
+          else
+            map('gd', vim.lsp.buf.definition, bufnr)
+          end
+
+          -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -46,6 +64,10 @@ return {
       })
 
       local servers = {
+        prettierd = {},
+        tsserver = {},
+        ['eslint-lsp'] = {},
+        ['svelte-language-server'] = {},
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
@@ -79,12 +101,21 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua',
+        'svelte-language-server',
+        'prettierd',
+        'tsserver',
+        'eslint-lsp',
+        'prismals',
+        'tailwindcss',
+        'cssls',
+        'html',
         'rust_analyzer',
         'dockerls',
         'terraform-ls',
         'clangd',
         'clang-format',
         'checkmake',
+        'markdownlint',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed, automatic_installation = true }
