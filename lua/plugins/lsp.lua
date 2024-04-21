@@ -94,6 +94,7 @@ return {
             },
           },
         },
+        ['asm-lsp'] = {},
       }
 
       require('mason').setup()
@@ -116,6 +117,8 @@ return {
         'clang-format',
         'checkmake',
         'markdownlint',
+        'asm-lsp',
+        'asmfmt',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed, automatic_installation = true }
