@@ -1,6 +1,7 @@
 -- Fancier statusline
 return {
   'nvim-lualine/lualine.nvim',
+  dependencies = { 'stevearc/overseer.nvim' },
   config = function()
     require('lualine').setup {
       options = {
@@ -20,6 +21,9 @@ return {
           },
         },
         lualine_x = {
+          {
+            'overseer',
+          },
           {
             'diagnostics',
             sources = { 'nvim_diagnostic' },

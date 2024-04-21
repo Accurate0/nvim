@@ -99,6 +99,7 @@ return {
         tailwindcss = {},
         prismals = {},
         html = {},
+        omnisharp = {},
       }
 
       require('mason').setup()
@@ -115,6 +116,7 @@ return {
         'cssls',
         'html',
         'rust_analyzer',
+        'omnisharp',
         'dockerls',
         'terraform-ls',
         'clangd',
