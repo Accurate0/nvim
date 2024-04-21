@@ -54,6 +54,17 @@ vim.keymap.set('n', '<leader>or', function()
   end
 end, { desc = 'Overseer: Run last task' })
 
+vim.keymap.set('n', '<leader>ok', function()
+  local overseer = require 'overseer'
+  local tasks = overseer.list_tasks()
+
+  for _, task in pairs(tasks) do
+    if task.status == 'RUNNING' then
+      overseer.run_action(task, 'stop')
+    end
+  end
+end, { desc = 'Overseer: Stop all tasks' })
+
 vim.keymap.set('n', '<leader>on', function()
   vim.cmd 'OverseerRunCmd'
 end, { desc = 'Overseer: Run new task' })
@@ -69,3 +80,15 @@ end, { desc = 'Overseer: Run task action' })
 vim.keymap.set('n', '<leader>ot', function()
   vim.cmd 'OverseerRun'
 end, { desc = 'Overseer: Run task template' })
+
+vim.keymap.set('n', '<leader>obs', function()
+  vim.cmd 'OverseerSaveBundle'
+end, { desc = 'Overseer: Save current tasks' })
+
+vim.keymap.set('n', '<leader>obl', function()
+  vim.cmd 'OverseerLoadBundle'
+end, { desc = 'Overseer: Load saved tasks' })
+
+vim.keymap.set('n', '<leader>obd', function()
+  vim.cmd 'OverseerDeleteBundle'
+end, { desc = 'Overseer: Delete saved tasks' })
