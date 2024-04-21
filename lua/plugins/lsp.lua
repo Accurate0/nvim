@@ -95,6 +95,10 @@ return {
           },
         },
         ['asm-lsp'] = {},
+        cssls = {},
+        tailwindcss = {},
+        prismals = {},
+        html = {},
       }
 
       require('mason').setup()

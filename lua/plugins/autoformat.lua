@@ -28,12 +28,20 @@ return {
         lua = { 'stylua' },
         tex = { 'latexindent' },
         asm = { 'asmfmt' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        ['javascript'] = { { 'prettierd', 'prettier' } },
+        ['javascriptreact'] = { { 'prettierd', 'prettier' } },
+        ['typescript'] = { { 'prettierd', 'prettier' } },
+        ['typescriptreact'] = { { 'prettierd', 'prettier' } },
+        ['vue'] = { { 'prettierd', 'prettier' } },
+        ['css'] = { { 'prettierd', 'prettier' } },
+        ['scss'] = { { 'prettierd', 'prettier' } },
+        ['less'] = { { 'prettierd', 'prettier' } },
+        ['html'] = { { 'prettierd', 'prettier' } },
+        ['json'] = { { 'prettierd', 'prettier' } },
+        ['jsonc'] = { { 'prettierd', 'prettier' } },
+        ['yaml'] = { { 'prettierd', 'prettier' } },
+        ['graphql'] = { { 'prettierd', 'prettier' } },
+        ['handlebars'] = { { 'prettierd', 'prettier' } },
       },
     },
   },
