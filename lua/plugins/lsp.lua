@@ -34,7 +34,6 @@ return {
             map('gd', vim.lsp.buf.definition, bufnr)
           end
 
-          -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -107,23 +106,8 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua',
-        'svelte-language-server',
-        'prettierd',
-        'tsserver',
-        'eslint-lsp',
-        'prismals',
-        'tailwindcss',
-        'cssls',
-        'html',
-        'rust_analyzer',
-        'omnisharp',
-        'dockerls',
-        'terraform-ls',
-        'clangd',
-        'clang-format',
         'checkmake',
         'markdownlint',
-        'asm-lsp',
         'asmfmt',
       })
 

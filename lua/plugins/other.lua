@@ -8,8 +8,6 @@ return {
     event = 'VimEnter',
     config = function()
       require('which-key').setup()
-
-      -- Document existing key chains
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
@@ -21,7 +19,6 @@ return {
         ['<leader>o'] = { name = '[O]verseer', _ = 'which_key_ignore' },
         ['<leader>ob'] = { name = '[O]verseer [B]undle', _ = 'which_key_ignore' },
       }
-      -- visual mode
       require('which-key').register({
         ['<leader>h'] = { 'Git [H]unk' },
       }, { mode = 'v' })
@@ -31,7 +28,6 @@ return {
     'lervag/vimtex',
     init = function() end,
   },
-  -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   { 'typicode/bg.nvim', lazy = false },
 }
