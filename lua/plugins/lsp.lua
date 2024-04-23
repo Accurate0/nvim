@@ -99,6 +99,7 @@ return {
         prismals = {},
         html = {},
         omnisharp = {},
+        jsonls = {},
       }
 
       require('mason').setup()
