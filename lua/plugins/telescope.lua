@@ -16,9 +16,19 @@ return {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
+      local telescopeConfig = require 'telescope.config'
+
+      local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+      table.insert(vimgrep_arguments, '--hidden')
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!**/.git/*')
+
       require('telescope').setup {
         pickers = {
+          defaults = { vimgrep_arguments = vimgrep_arguments },
           colorscheme = { enable_preview = true },
+          find_files = { hidden = true, find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' } },
         },
         extensions = {
           ['ui-select'] = {
