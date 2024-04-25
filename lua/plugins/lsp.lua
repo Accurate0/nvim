@@ -78,7 +78,20 @@ return {
         },
         dockerls = {},
         ['terraform-ls'] = {},
-        clangd = {},
+        clangd = {
+          cmd = {
+            'clangd',
+            '--header-insertion=never',
+            '-j',
+            '24',
+            '--completion-style=detailed',
+            '--function-arg-placeholders',
+            '--rename-file-limit=0',
+            '--background-index',
+            '--background-index-priority=normal',
+          },
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+        },
         ['clang-format'] = {},
         checkmake = {},
         lua_ls = {
