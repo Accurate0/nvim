@@ -70,3 +70,7 @@ end, { desc = 'Overseer: Load saved tasks' })
 vim.keymap.set('n', '<leader>obd', function()
   vim.cmd 'OverseerDeleteBundle'
 end, { desc = 'Overseer: Delete saved tasks' })
+
+vim.keymap.set('n', '<A-1>', '<Cmd>BufferPrevious<CR>', { desc = 'Previous Tab' })
+vim.keymap.set('n', '<A-2>', '<Cmd>BufferNext<CR>', { desc = 'Next Tab' })
+vim.keymap.set('n', '<A-c>', '<Cmd>BufferClose<CR>', { desc = 'Close Tab' })
