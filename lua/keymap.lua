@@ -18,10 +18,6 @@ vim.keymap.set('n', '<leader>e', function()
   require('neo-tree.command').execute { toggle = true }
 end, { desc = 'Toggle neotree' })
 
-vim.keymap.set('n', '<C-/>', function()
-  require('Comment.api').toggle.linewise.current()
-end, { noremap = true, silent = true })
-
 vim.keymap.set('n', '<leader>or', function()
   local overseer = require 'overseer'
   local tasks = overseer.list_tasks { recent_first = true }
