@@ -34,6 +34,7 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'onsails/lspkind.nvim',
     },
     config = function()
       -- See `:help cmp`
@@ -42,6 +43,28 @@ return {
       luasnip.config.setup {}
 
       cmp.setup {
+        ---@diagnostic disable: missing-fields
+        formatting = {
+          format = require('lspkind').cmp_format {
+            mode = 'symbol',
+            maxwidth = 50,
+            ellipsis_char = '...',
+            show_labelDetails = true,
+            symbol_map = { Copilot = '' },
+            before = function(entry, vim_item)
+              vim_item.menu = ({
+                nvim_lsp = '[LSP]',
+                luasnip = '[Snippet]',
+                buffer = '[Buffer]',
+                path = '[Path]',
+                copilot = '[Copilot]',
+              })[entry.source.name]
+
+              return vim_item
+            end,
+          },
+        },
+        --@diagnostic enable: missing-fields
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -96,9 +119,17 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
+          { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'buffer' },
           { name = 'path' },
+          { name = 'cmdline' },
+        },
+        window = {
+          documentation = {
+            border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          },
         },
       }
     end,
