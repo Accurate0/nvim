@@ -113,6 +113,7 @@ return {
         html = {},
         omnisharp = {},
         jsonls = {},
+        pylsp = {},
       }
 
       require('mason').setup()
