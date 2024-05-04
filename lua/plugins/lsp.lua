@@ -114,6 +114,7 @@ return {
         omnisharp = {},
         jsonls = {},
         pylsp = {},
+        bashls = {},
       }
 
       require('mason').setup()
@@ -124,6 +125,7 @@ return {
         'checkmake',
         'markdownlint',
         'asmfmt',
+        'shellcheck',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed, automatic_installation = true }

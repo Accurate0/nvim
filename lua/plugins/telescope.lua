@@ -28,7 +28,20 @@ return {
         pickers = {
           defaults = { vimgrep_arguments = vimgrep_arguments },
           colorscheme = { enable_preview = true },
-          find_files = { hidden = true, find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' } },
+          find_files = {
+            hidden = true,
+            find_command = {
+              'rg',
+              '--files',
+              '--hidden',
+              '--glob',
+              '!**/.git/*',
+              '--glob',
+              '!**/node_modules/*',
+              '--glob',
+              '!**/target/*',
+            },
+          },
         },
         extensions = {
           ['ui-select'] = {
