@@ -57,7 +57,7 @@ return {
           end
 
           map('<leader>th', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {}, { bufnr = 0 })
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
           end, '[T]oggle Inlay [H]ints')
         end,
       })
@@ -115,7 +115,11 @@ return {
         jsonls = {},
         pylsp = {},
         bashls = {},
-        typos_lsp = {},
+        typos_lsp = {
+          init_options = {
+            diagnosticSeverity = 'hint',
+          },
+        },
       }
 
       require('mason').setup()
@@ -155,10 +159,6 @@ return {
       local config = {
         virtual_text = {
           prefix = function(diagnostic)
-            if diagnostic.source == 'typos' then
-              return ' ' .. signs[vim.diagnostic.severity.INFO]
-            end
-
             return ' ' .. signs[diagnostic.severity] or signs[vim.diagnostic.severity.INFO]
           end,
         },
