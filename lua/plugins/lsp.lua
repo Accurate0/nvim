@@ -57,7 +57,7 @@ return {
           end
 
           map('<leader>th', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = 0 })
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {}, { bufnr = 0 })
           end, '[T]oggle Inlay [H]ints')
         end,
       })
@@ -115,6 +115,7 @@ return {
         jsonls = {},
         pylsp = {},
         bashls = {},
+        typos_lsp = {},
       }
 
       require('mason').setup()
@@ -144,8 +145,23 @@ return {
         },
       }
 
+      local signs = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.HINT] = '󰌵',
+        [vim.diagnostic.severity.INFO] = '',
+      }
+
       local config = {
-        virtual_text = { prefix = '●' },
+        virtual_text = {
+          prefix = function(diagnostic)
+            if diagnostic.source == 'typos' then
+              return ' ' .. signs[vim.diagnostic.severity.INFO]
+            end
+
+            return ' ' .. signs[diagnostic.severity] or signs[vim.diagnostic.severity.INFO]
+          end,
+        },
         update_in_insert = true,
         underline = true,
         severity_sort = true,
@@ -166,7 +182,7 @@ return {
       vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         underline = true,
         update_in_insert = true,
-        virtual_text = { spacing = 4, prefix = '●' },
+        virtual_text = { spacing = 4, prefix = config.virtual_text.prefix },
         severity_sort = true,
       })
     end,
