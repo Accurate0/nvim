@@ -29,5 +29,5 @@ return {
     init = function() end,
   },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-  { 'Accurate0/bg.nvim', lazy = false },
+  { 'typicode/bg.nvim', lazy = false },
 }

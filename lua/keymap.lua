@@ -70,3 +70,5 @@ end, { desc = 'Overseer: Delete saved tasks' })
 vim.keymap.set('n', '<A-1>', '<Cmd>BufferPrevious<CR>', { desc = 'Previous Tab' })
 vim.keymap.set('n', '<A-2>', '<Cmd>BufferNext<CR>', { desc = 'Next Tab' })
 vim.keymap.set('n', '<A-w>', '<Cmd>BufferClose<CR>', { desc = 'Close Tab' })
+
+vim.keymap.set('n', '<leader>tp', require('precognition').toggle, { desc = '[T]oggle [P]recognition' })

@@ -2,6 +2,7 @@ return {
   {
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
+    enabled = false,
     opts = {
       {
         suggestion = { enabled = false },
@@ -11,6 +12,7 @@ return {
   },
   {
     'zbirenbaum/copilot-cmp',
+    enabled = false,
     config = function()
       require('copilot_cmp').setup()
     end,
