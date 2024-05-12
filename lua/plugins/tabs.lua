@@ -12,6 +12,7 @@ return {
       auto_hide = true,
       clickable = false,
       animation = false,
+      exclude_ft = { 'qf' },
     },
     version = '^1.0.0',
   },
