@@ -15,6 +15,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('n', '<leader>L', require('lazy').show, { desc = 'Open Lazy' })
+vim.keymap.set('n', '<leader>M', require('mason.ui').open, { desc = 'Open Mason' })
 
 vim.keymap.set('n', '<leader>w', function()
   require('neo-tree.command').execute { toggle = true }
