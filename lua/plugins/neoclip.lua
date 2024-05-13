@@ -14,4 +14,5 @@ return {
   config = function(_, opts)
     require('neoclip').setup(opts)
   end,
+  lazy = false,
 }
