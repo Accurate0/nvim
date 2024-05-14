@@ -28,6 +28,7 @@ return {
         'oil',
         'undotree',
         'Trouble',
+        'trouble',
       },
     },
   },
