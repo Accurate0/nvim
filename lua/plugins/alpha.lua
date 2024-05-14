@@ -123,9 +123,15 @@ return {
         }
       end
 
+      local fortune = vim.fn.system { 'fortune', '-a', '-s', '-n', '50' }
+      local split_fortune = {}
+      for line in fortune:gmatch '[^\n]+' do
+        table.insert(split_fortune, line)
+      end
+
       local header = {
         type = 'text',
-        val = vim.fn.system { 'fortune', '-a', '-s', '-n', '50' },
+        val = split_fortune,
         opts = {
           position = 'center',
         },

@@ -2,6 +2,7 @@ return {
   {
     'echasnovski/mini.comment',
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    event = 'BufEnter',
     config = function()
       require('mini.comment').setup {
         options = {
