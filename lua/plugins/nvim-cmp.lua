@@ -2,10 +2,6 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
-    -- FIXME: REMOVE ONCE UPDATED
-    -- https://github.com/hrsh7th/nvim-cmp/pull/1931
-    url = 'git@github.com:lewis6991/nvim-cmp.git',
-    branch = 'depr',
     dependencies = {
       {
         'L3MON4D3/LuaSnip',

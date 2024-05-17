@@ -4,13 +4,7 @@ return {
     event = 'VeryLazy',
     dependencies = {
       'williamboman/mason.nvim',
-      {
-        'williamboman/mason-lspconfig.nvim',
-        -- FIXME: remove once updated
-        -- https://github.com/williamboman/mason-lspconfig.nvim/pull/413
-        url = 'git@github.com:seblj/mason-lspconfig.nvim.git',
-        branch = 'islist',
-      },
+      'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       { 'folke/neodev.nvim', opts = {} },
