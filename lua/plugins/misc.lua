@@ -1,6 +1,5 @@
 return {
   { 'lambdalisue/suda.vim' },
-  { 'm4xshen/autoclose.nvim', opts = {} },
   { 'tpope/vim-sleuth' },
   { 'numToStr/Comment.nvim', opts = {} },
   {
