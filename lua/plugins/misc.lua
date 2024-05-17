@@ -23,10 +23,6 @@ return {
       }, { mode = 'v' })
     end,
   },
-  {
-    'lervag/vimtex',
-    init = function() end,
-  },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   { 'typicode/bg.nvim', lazy = false },
 }

@@ -1,5 +1,6 @@
 return {
   'AckslD/nvim-neoclip.lua',
+  event = 'VeryLazy',
   dependencies = {
     { 'kkharji/sqlite.lua' },
     { 'nvim-telescope/telescope.nvim' },
@@ -14,5 +15,4 @@ return {
   config = function(_, opts)
     require('neoclip').setup(opts)
   end,
-  lazy = false,
 }

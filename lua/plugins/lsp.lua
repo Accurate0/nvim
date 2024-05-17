@@ -1,9 +1,14 @@
 return {
   {
     'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
     dependencies = {
       'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      {
+        'williamboman/mason-lspconfig.nvim',
+        url = 'git@github.com:seblj/mason-lspconfig.nvim.git',
+        branch = 'islist',
+      },
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       { 'folke/neodev.nvim', opts = {} },
