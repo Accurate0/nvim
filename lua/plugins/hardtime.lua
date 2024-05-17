@@ -29,6 +29,7 @@ return {
         'undotree',
         'Trouble',
         'trouble',
+        'lspinfo',
       },
     },
   },
