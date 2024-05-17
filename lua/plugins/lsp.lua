@@ -6,6 +6,8 @@ return {
       'williamboman/mason.nvim',
       {
         'williamboman/mason-lspconfig.nvim',
+        -- FIXME: remove once updated
+        -- https://github.com/williamboman/mason-lspconfig.nvim/pull/413
         url = 'git@github.com:seblj/mason-lspconfig.nvim.git',
         branch = 'islist',
       },
