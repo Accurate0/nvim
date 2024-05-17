@@ -30,9 +30,9 @@ return {
             or filetype == 'javascript'
             or filetype == 'javascriptreact'
           then
-            map('gd', require('typescript-tools.api').go_to_source_definition, bufnr)
+            map('gd', require('typescript-tools.api').go_to_source_definition, '[G]oto [D]efinition')
           else
-            map('gd', vim.lsp.buf.definition, bufnr)
+            map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
           end
 
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
