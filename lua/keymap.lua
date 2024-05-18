@@ -23,3 +23,7 @@ map('n', '<leader>tp', require('precognition').toggle, '[T]oggle [P]recognition'
 
 map('n', '<C-u>', '<C-u>zz')
 map('n', '<C-d>', '<C-d>zz')
+
+map('n', '<A-1>', '<Cmd>BufferPrevious<CR>', 'Previous Tab')
+map('n', '<A-2>', '<Cmd>BufferNext<CR>', 'Next Tab')
+map('n', '<A-w>', '<Cmd>BufferClose<CR>', 'Close Tab')
