@@ -59,7 +59,9 @@ return {
           end,
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
-
+        experimental = {
+          ghost_text = false,
+        },
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
           ['<Tab>'] = cmp.mapping.select_next_item(),

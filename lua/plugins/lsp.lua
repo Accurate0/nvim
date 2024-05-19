@@ -6,7 +6,7 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      'j-hui/fidget.nvim',
       { 'folke/neodev.nvim', opts = {} },
       {
         'pmizio/typescript-tools.nvim',
@@ -40,6 +40,7 @@ return {
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
           map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>e', vim.diagnostic.open_float, 'Show diagnostic [E]rror messages')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -64,7 +65,6 @@ return {
       })
 
       local servers = {
-        prettierd = {},
         tsserver = {},
         ['eslint-lsp'] = {},
         ['svelte-language-server'] = {},
@@ -131,6 +131,7 @@ return {
         'checkmake',
         'markdownlint',
         'asmfmt',
+        'prettierd',
         'shellcheck',
       })
 

@@ -5,5 +5,15 @@ return {
       startVisible = true,
       showBlankVirtLine = false,
     },
+    event = 'BufEnter',
+    keys = {
+      {
+        '<leader>tp',
+        function()
+          require('precognition').toggle()
+        end,
+        desc = '[T]oggle [P]recognition',
+      },
+    },
   },
 }

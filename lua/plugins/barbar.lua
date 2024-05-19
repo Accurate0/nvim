@@ -14,6 +14,24 @@ return {
       animation = false,
       exclude_ft = { 'qf' },
     },
+    event = 'BufEnter',
+    keys = {
+      {
+        '<A-1>',
+        '<Cmd>BufferPrevious<CR>',
+        desc = 'Previous Tab',
+      },
+      {
+        '<A-2>',
+        '<Cmd>BufferNext<CR>',
+        desc = 'Next Tab',
+      },
+      {
+        '<A-w>',
+        '<Cmd>BufferClose<CR>',
+        desc = 'Close Tab',
+      },
+    },
     version = '^1.0.0',
   },
 }

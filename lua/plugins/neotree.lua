@@ -9,6 +9,15 @@ return {
       'MunifTanjim/nui.nvim',
       '3rd/image.nvim',
     },
+    keys = {
+      {
+        '<leader>w',
+        function()
+          require('neo-tree.command').execute { toggle = true }
+        end,
+        desc = 'Toggle Neotree',
+      },
+    },
     config = function()
       require('neo-tree').setup {
         default_component_configs = {
