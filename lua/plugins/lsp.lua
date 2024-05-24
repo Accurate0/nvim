@@ -121,6 +121,7 @@ return {
             diagnosticSeverity = 'hint',
           },
         },
+        texlab = {},
       }
 
       require('mason').setup()
