@@ -45,6 +45,31 @@ return {
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+          vim.api.nvim_create_autocmd('CursorHold', {
+            buffer = bufnr,
+            desc = '[LSP] show diagnostics on CursorHold',
+            callback = function()
+              for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.api.nvim_win_get_config(winid).relative ~= '' then
+                  return
+                end
+              end
+
+              local line_num = vim.api.nvim__buf_stats(bufnr).line_num
+              local diagnostics = vim.diagnostic.get(bufnr, { lnum = line_num })
+
+              if #diagnostics > 0 then
+                vim.diagnostic.open_float(nil, {
+                  focusable = false,
+                  close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+                  border = 'rounded',
+                  source = 'always',
+                  prefix = ' ',
+                })
+              end
+            end,
+          })
+
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -58,9 +83,11 @@ return {
             })
           end
 
-          map('<leader>th', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = nil })
-          end, '[T]oggle Inlay [H]ints')
+          if client and client.server_capabilities.inlayHintProvider then
+            map('<leader>th', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = nil })
+            end, '[T]oggle Inlay [H]ints')
+          end
         end,
       })
 
@@ -122,6 +149,13 @@ return {
           },
         },
         texlab = {},
+        yamlls = {
+          yaml = {
+            schemas = {
+              ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+            },
+          },
+        },
       }
 
       require('mason').setup()
@@ -189,8 +223,8 @@ return {
 
       vim.diagnostic.config(config)
 
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
       vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, config)
     end,
   },
