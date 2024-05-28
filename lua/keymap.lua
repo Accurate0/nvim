@@ -10,6 +10,8 @@ map('n', '<C-l>', '<C-w><C-l>', 'Move focus to the right window')
 map('n', '<C-j>', '<C-w><C-j>', 'Move focus to the lower window')
 map('n', '<C-k>', '<C-w><C-k>', 'Move focus to the upper window')
 
+map('', '<Leader>d', '"_d', 'Delete without copying')
+
 map('n', '<leader>L', require('lazy').show, 'Open Lazy')
 map('n', '<leader>M', require('mason.ui').open, 'Open Mason')
 

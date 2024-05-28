@@ -1,4 +1,4 @@
--- Fancier statusline
+---@type LazySpec
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'stevearc/overseer.nvim' },

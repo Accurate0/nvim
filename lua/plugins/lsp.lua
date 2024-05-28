@@ -1,12 +1,27 @@
+---@type LazySpec
 return {
   {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      'williamboman/mason.nvim',
+      -- notification
+      'j-hui/fidget.nvim',
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          ui = {
+            border = 'rounded',
+            icons = {
+              package_installed = '✓',
+              package_pending = '➜',
+              package_uninstalled = '✗',
+            },
+          },
+        },
+      },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'j-hui/fidget.nvim',
+
       { 'folke/neodev.nvim', opts = {} },
       {
         'pmizio/typescript-tools.nvim',
@@ -37,8 +52,7 @@ return {
 
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('<leader>D', require('telescope.builtin').lsp_document_symbols, '[D]ocument Symbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -46,7 +60,7 @@ return {
 
           vim.api.nvim_create_autocmd('CursorHold', {
             buffer = bufnr,
-            desc = '[LSP] show diagnostics on CursorHold',
+            desc = 'LSP: show diagnostics on CursorHold',
             callback = function()
               for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
                 if vim.api.nvim_win_get_config(winid).relative ~= '' then
@@ -97,6 +111,11 @@ return {
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
+              cargo = {
+                buildScripts = {
+                  enable = true,
+                },
+              },
               check = {
                 command = 'clippy',
               },
@@ -162,6 +181,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua',
+        'protolint',
         'checkmake',
         'markdownlint',
         'asmfmt',
@@ -169,7 +189,12 @@ return {
         'shellcheck',
       })
 
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed, automatic_installation = true }
+      require('mason-tool-installer').setup {
+        ensure_installed = ensure_installed,
+        automatic_installation = true,
+        -- auto_update = true,
+        -- run_on_start = true,
+      }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())

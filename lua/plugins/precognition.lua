@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     'tris203/precognition.nvim',
