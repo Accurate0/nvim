@@ -5,16 +5,35 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
+      'olimorris/persisted.nvim',
     },
     config = function()
       local dashboard = require 'alpha.themes.dashboard'
       local cdir = vim.fn.getcwd()
       local if_nil = vim.F.if_nil
+      local chars = require('chars').glyphs
 
       local nvim_web_devicons = {
         enabled = true,
         highlight = true,
       }
+
+      local function get_session_list()
+        local group = { type = 'group', opts = { spacing = 0 }, val = {} }
+        local persisted = require 'persisted'
+        local sessions = persisted.list()
+
+        for i, session in pairs(sessions) do
+          local initial_char = chars[math.random(#chars)]
+          local button_text = initial_char .. '  ' .. session.name
+          local button = dashboard.button(string.char(96 + i), button_text, '<cmd>SessionLoadFromFile ' .. session.file_path .. '<cr>')
+
+          local last_part = button_text:match '.*[/\\]'
+          button.opts.hl = { { 'Comment', 2, #last_part } }
+          table.insert(group.val, button)
+        end
+        return group
+      end
 
       local function get_extension(fn)
         local match = fn:match '^.+(%..+)$'
@@ -157,6 +176,21 @@ return {
               return { mru(0, cdir) }
             end,
             opts = { shrink_margin = false },
+          },
+          { type = 'padding', val = 1 },
+          {
+            type = 'text',
+            val = 'Sessions',
+            opts = {
+              hl = 'Title',
+              position = 'center',
+            },
+          },
+          {
+            type = 'group',
+            val = function()
+              return { get_session_list() }
+            end,
           },
         },
       }

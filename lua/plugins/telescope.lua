@@ -8,6 +8,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-frecency.nvim',
+      'olimorris/persisted.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -56,6 +57,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'frecency')
+      pcall(require('telescope').load_extension, 'persisted')
 
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
