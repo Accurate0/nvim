@@ -26,7 +26,11 @@ return {
         for i, session in pairs(sessions) do
           local initial_char = chars[math.random(#chars)]
           local button_text = initial_char .. '  ' .. session.name
-          local button = dashboard.button(string.char(96 + i), button_text, '<cmd>SessionLoadFromFile ' .. session.file_path .. '<cr>')
+          local button = dashboard.button(
+            string.char(96 + i),
+            button_text,
+            '<cmd>SessionLoadFromFile ' .. session.file_path .. '<cr>'
+          )
 
           local last_part = button_text:match '.*[/\\]'
           button.opts.hl = { { 'Comment', 2, #last_part } }
@@ -71,7 +75,8 @@ return {
           ico_txt = ''
         end
         local cd_cmd = (autocd and ' | cd %:p:h' or '')
-        local file_button_el = dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
+        local file_button_el =
+          dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
         local fn_start = short_fn:match '.*[/\\]'
         if fn_start ~= nil then
           table.insert(fb_hl, { 'Comment', #ico_txt - 2, #fn_start + #ico_txt })
@@ -84,7 +89,8 @@ return {
 
       local mru_opts = {
         ignore = function(path, ext)
-          return (string.find(path, 'COMMIT_EDITMSG')) or (vim.tbl_contains(default_mru_ignore, ext))
+          return (string.find(path, 'COMMIT_EDITMSG'))
+            or (vim.tbl_contains(default_mru_ignore, ext))
         end,
         autocd = false,
       }
