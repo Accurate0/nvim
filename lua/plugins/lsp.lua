@@ -4,6 +4,10 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
+      {
+        'kevinhwang91/nvim-ufo',
+        dependencies = 'kevinhwang91/promise-async',
+      },
       -- notification
       'j-hui/fidget.nvim',
       {
@@ -21,7 +25,6 @@ return {
       },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
       { 'folke/neodev.nvim', opts = {} },
       {
         'pmizio/typescript-tools.nvim',
@@ -204,6 +207,9 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities =
         vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', capabilities, {
+        textDocument = { foldingRange = { dynamicRegistration = false, lineFoldingOnly = true } },
+      })
 
       require('mason-lspconfig').setup {
         handlers = {
@@ -217,11 +223,53 @@ return {
         },
       }
 
+      vim.o.foldcolumn = '0'
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      -- vim.o.fold
+      vim.o.foldenable = true
+
+      require('ufo').setup {
+        fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+          local newVirtText = {}
+          local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+          local sufWidth = vim.fn.strdisplaywidth(suffix)
+          local targetWidth = width - sufWidth
+          local curWidth = 0
+          for _, chunk in ipairs(virtText) do
+            local chunkText = chunk[1]
+            local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if targetWidth > curWidth + chunkWidth then
+              table.insert(newVirtText, chunk)
+            else
+              chunkText = truncate(chunkText, targetWidth - curWidth)
+              local hlGroup = chunk[2]
+              table.insert(newVirtText, { chunkText, hlGroup })
+              chunkWidth = vim.fn.strdisplaywidth(chunkText)
+              -- str width returned from truncate() may less than 2nd argument, need padding
+              if curWidth + chunkWidth < targetWidth then
+                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+              end
+              break
+            end
+            curWidth = curWidth + chunkWidth
+          end
+          table.insert(newVirtText, { suffix, 'MoreMsg' })
+          return newVirtText
+        end,
+        preview = {
+          win_config = {
+            winblend = 0,
+            maxheight = 80,
+          },
+        },
+      }
+
       local signs = {
-        [vim.diagnostic.severity.ERROR] = '',
-        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.ERROR] = ' ',
+        [vim.diagnostic.severity.WARN] = ' ',
         [vim.diagnostic.severity.HINT] = '󰌵',
-        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.INFO] = ' ',
       }
 
       local config = {
@@ -230,6 +278,7 @@ return {
             return ' ' .. signs[diagnostic.severity] or signs[vim.diagnostic.severity.INFO]
           end,
           spacing = 4,
+          suffix = ' ',
         },
         signs = {
           text = {

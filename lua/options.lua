@@ -17,7 +17,9 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
-vim.opt.scrolloff = 9
+vim.opt.scrolloff = 15
 vim.opt.hlsearch = true
 vim.o.termguicolors = true
 vim.opt.colorcolumn = '100'
+-- vim.opt.spelllang = 'en_gb'
+-- vim.opt.spell = true
