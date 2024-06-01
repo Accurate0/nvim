@@ -20,3 +20,4 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 9
 vim.opt.hlsearch = true
 vim.o.termguicolors = true
+vim.opt.colorcolumn = '100'

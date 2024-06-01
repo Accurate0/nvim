@@ -190,6 +190,7 @@ return {
         'markdownlint',
         'asmfmt',
         'prettierd',
+        'prettier',
         'shellcheck',
       })
 
