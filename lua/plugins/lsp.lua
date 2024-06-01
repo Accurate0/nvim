@@ -45,7 +45,11 @@ return {
             or filetype == 'javascript'
             or filetype == 'javascriptreact'
           then
-            map('gd', require('typescript-tools.api').go_to_source_definition, '[G]oto [D]efinition')
+            map(
+              'gd',
+              require('typescript-tools.api').go_to_source_definition,
+              '[G]oto [D]efinition'
+            )
           else
             map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
           end
@@ -197,13 +201,15 @@ return {
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities =
+        vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.capabilities =
+              vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
 
             require('lspconfig')[server_name].setup(server)
           end,
@@ -247,9 +253,12 @@ return {
 
       vim.diagnostic.config(config)
 
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
-      vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, config)
+      vim.lsp.handlers['textDocument/hover'] =
+        vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+      vim.lsp.handlers['textDocument/signatureHelp'] =
+        vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+      vim.lsp.handlers['textDocument/publishDiagnostics'] =
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, config)
     end,
   },
 }

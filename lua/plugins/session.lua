@@ -10,8 +10,6 @@ return {
           '~/Projects',
         },
         ignored_dirs = {
-          '~/.config',
-          '~/.local/nvim',
           { '/', exact = true },
           { '/tmp', exact = true },
         },
