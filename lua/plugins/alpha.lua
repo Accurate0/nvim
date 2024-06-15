@@ -3,6 +3,7 @@ return {
   {
     'goolord/alpha-nvim',
     dependencies = {
+      'kkharji/sqlite.lua',
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
       'olimorris/persisted.nvim',
