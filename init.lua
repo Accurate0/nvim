@@ -17,6 +17,9 @@ require('lazy').setup('plugins', {
   install = {
     colorscheme = { 'catppuccin-mocha' },
   },
+  dev = {
+    path = '~/Projects',
+  },
 })
 
 require 'options'

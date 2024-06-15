@@ -2,6 +2,8 @@
 return {
   {
     'olimorris/persisted.nvim',
+    dev = true,
+    dependencies = { 'kkharji/sqlite.lua' },
     lazy = false,
     config = function()
       require('persisted').setup {
@@ -20,6 +22,19 @@ return {
           return true
         end,
       }
+
+      local group = vim.api.nvim_create_augroup('PersistedHooks', {})
+      vim.api.nvim_create_autocmd({ 'User' }, {
+        pattern = 'PersistedLoadPre',
+        group = group,
+        callback = function(session)
+          local db = require('session').get_database()
+          db:eval(
+            'INSERT INTO sessions (name, load_count) VALUES (?, 1) ON CONFLICT (name) DO UPDATE SET load_count = sessions.load_count + 1',
+            session.data.name
+          )
+        end,
+      })
     end,
   },
 }
