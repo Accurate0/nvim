@@ -47,7 +47,12 @@ return {
           },
         },
         extensions = {
-          frecency = { matcher = 'fuzzy', auto_validate = true },
+          frecency = {
+            matcher = 'fuzzy',
+            auto_validate = true,
+            db_safe_mode = false,
+            -- show_scores = true,
+          },
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
