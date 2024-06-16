@@ -22,6 +22,7 @@ require('lazy').setup('plugins', {
   },
 })
 
+require 'bg'
 require 'options'
 require 'keymap'
 require 'autocmd'

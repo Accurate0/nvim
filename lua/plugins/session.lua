@@ -2,7 +2,6 @@
 return {
   {
     'olimorris/persisted.nvim',
-    dev = true,
     dependencies = { 'kkharji/sqlite.lua' },
     lazy = false,
     config = function()
