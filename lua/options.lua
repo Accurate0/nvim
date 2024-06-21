@@ -21,5 +21,6 @@ vim.opt.scrolloff = 15
 vim.opt.hlsearch = true
 vim.o.termguicolors = true
 vim.opt.colorcolumn = '100'
+vim.opt.wrap = true
 -- vim.opt.spelllang = 'en_gb'
 -- vim.opt.spell = true
