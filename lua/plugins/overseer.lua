@@ -1,4 +1,3 @@
----@type LazySpec
 return {
   {
     'stevearc/overseer.nvim',
@@ -31,41 +30,41 @@ return {
         end,
         desc = 'Overseer: Stop all tasks',
       },
-    },
-    {
-      '<leader>on',
-      '<cmd>OverseerRunCmd<cr>',
-      desc = 'Overseer: Run new task',
-    },
-    {
-      '<leader>ow',
-      '<cmd>OverseerToggle! bottom <cr>',
-      desc = 'Overseer: Toggle window',
-    },
-    {
-      '<leader>oa',
-      '<cmd>OverseerTaskAction<cr>',
-      desc = 'Overseer Run task action',
-    },
-    {
-      '<leader>ot',
-      '<cmd>OverseerRun<cr>',
-      desc = 'Overseer: Run task template',
-    },
-    {
-      '<leader>obs',
-      '<cmd>OverseerSaveBundle<cr>',
-      desc = 'Overseer: Save current tasks',
-    },
-    {
-      '<leader>obl',
-      '<cmd>OverseerLoadBundle<cr>',
-      desc = 'Overseer: Load saved tasks',
-    },
-    {
-      '<leader>obd',
-      '<cmd>OverseerDeleteBundle<cr>',
-      desc = 'Overseer: Delete saved tasks',
+      {
+        '<leader>on',
+        '<cmd>OverseerRunCmd<cr>',
+        desc = 'Overseer: Run new task',
+      },
+      {
+        '<leader>ow',
+        '<cmd>OverseerToggle! bottom<cr>',
+        desc = 'Overseer: Toggle window',
+      },
+      {
+        '<leader>oa',
+        '<cmd>OverseerTaskAction<cr>',
+        desc = 'Overseer Run task action',
+      },
+      {
+        '<leader>ot',
+        '<cmd>OverseerRun<cr>',
+        desc = 'Overseer: Run task template',
+      },
+      {
+        '<leader>obs',
+        '<cmd>OverseerSaveBundle<cr>',
+        desc = 'Overseer: Save current tasks',
+      },
+      {
+        '<leader>obl',
+        '<cmd>OverseerLoadBundle<cr>',
+        desc = 'Overseer: Load saved tasks',
+      },
+      {
+        '<leader>obd',
+        '<cmd>OverseerDeleteBundle<cr>',
+        desc = 'Overseer: Delete saved tasks',
+      },
     },
   },
 }
