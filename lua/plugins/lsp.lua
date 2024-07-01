@@ -30,6 +30,7 @@ return {
         'pmizio/typescript-tools.nvim',
         dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
       },
+      'b0o/schemastore.nvim',
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -166,7 +167,14 @@ return {
         prismals = {},
         html = {},
         omnisharp = {},
-        jsonls = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
         pylsp = {},
         bashls = {},
         typos_lsp = {
@@ -176,9 +184,16 @@ return {
         },
         texlab = {},
         yamlls = {
-          yaml = {
-            schemas = {
-              ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+          settings = {
+            yaml = {
+              schemaStore = {
+                -- You must disable built-in schemaStore support if you want to use
+                -- this plugin and its advanced options like `ignore`.
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = '',
+              },
+              schemas = require('schemastore').yaml.schemas(),
             },
           },
         },
