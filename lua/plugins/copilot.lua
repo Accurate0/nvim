@@ -2,8 +2,8 @@
 return {
   {
     'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
     enabled = false,
+    event = 'InsertEnter',
     opts = {
       {
         suggestion = { enabled = false },
@@ -12,6 +12,13 @@ return {
     },
     dependencies = {
       'j-hui/fidget.nvim',
+    },
+    keys = {
+      {
+        '<leader>tc',
+        '<cmd>Copilot toggle<CR>',
+        desc = '[T]oggle [C]opilot',
+      },
     },
     config = function(_, opts)
       require('copilot').setup(opts)
