@@ -5,18 +5,28 @@ return {
     event = 'VimEnter',
     config = function()
       require('which-key').setup()
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-        ['<leader>o'] = { name = '[O]verseer', _ = 'which_key_ignore' },
-        ['<leader>ob'] = { name = '[O]verseer [B]undle', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>c', name = '[C]ode' },
+        { '<leader>c_', hidden = true },
+
+        { '<leader>r', name = '[R]ename' },
+        { '<leader>r_', hidden = true },
+
+        { '<leader>s', name = '[S]earch' },
+        { '<leader>s_', hidden = true },
+
+        { '<leader>t', name = '[T]oggle' },
+        { '<leader>t_', hidden = true },
+
+        { '<leader>h', name = 'Git [H]unk' },
+        { '<leader>h_', hidden = true },
+
+        { '<leader>o', name = '[O]verseer' },
+        { '<leader>o_', hidden = true },
+
+        { '<leader>ob', name = '[O]verseer [B]undle' },
+        { '<leader>ob_', hidden = true },
       }
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
     end,
   },
 }

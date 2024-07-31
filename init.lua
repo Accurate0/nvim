@@ -28,5 +28,6 @@ require 'keymap'
 require 'autocmd'
 -- fuck my life
 vim.cmd.colorscheme 'catppuccin-mocha'
+-- vim.cmd.colorscheme 'mellow'
 
 -- vim: ts=2 sts=2 sw=2 et
