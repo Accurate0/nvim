@@ -33,6 +33,5 @@ return {
         desc = 'Close Tab',
       },
     },
-    version = '^1.0.0',
   },
 }

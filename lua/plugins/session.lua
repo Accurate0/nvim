@@ -3,6 +3,7 @@ return {
   {
     'olimorris/persisted.nvim',
     dependencies = { 'kkharji/sqlite.lua' },
+    commit = '0a9eebf5cc92b1113a382a660ee73f21ffd62ae7',
     config = function()
       require('persisted').setup {
         allowed_dirs = {
