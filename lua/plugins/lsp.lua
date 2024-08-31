@@ -113,6 +113,7 @@ return {
       })
 
       local servers = {
+        gopls = {},
         tsserver = {},
         ['eslint-lsp'] = {},
         ['svelte-language-server'] = {},
