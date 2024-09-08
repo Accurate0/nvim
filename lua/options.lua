@@ -26,5 +26,7 @@ vim.o.tabstop = 4
 vim.o.expandtab = true
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
+vim.g.diagnostic_on_cursor_hold = false
+vim.g.diagnostic_virtual_text = false
 -- vim.opt.spelllang = 'en_gb'
 -- vim.opt.spell = true

@@ -66,30 +66,32 @@ return {
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-          vim.api.nvim_create_autocmd('CursorHold', {
-            buffer = bufnr,
-            desc = 'LSP: show diagnostics on CursorHold',
-            callback = function()
-              for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-                if vim.api.nvim_win_get_config(winid).relative ~= '' then
-                  return
+          if vim.g.diagnostic_on_cursor_hold then
+            vim.api.nvim_create_autocmd('CursorHold', {
+              buffer = bufnr,
+              desc = 'LSP: show diagnostics on CursorHold',
+              callback = function()
+                for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+                  if vim.api.nvim_win_get_config(winid).relative ~= '' then
+                    return
+                  end
                 end
-              end
 
-              local line_num = vim.api.nvim__buf_stats(bufnr).line_num
-              local diagnostics = vim.diagnostic.get(bufnr, { lnum = line_num })
+                local line_num = vim.api.nvim__buf_stats(bufnr).line_num
+                local diagnostics = vim.diagnostic.get(bufnr, { lnum = line_num })
 
-              if #diagnostics > 0 then
-                vim.diagnostic.open_float(nil, {
-                  focusable = false,
-                  close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-                  border = 'rounded',
-                  source = 'always',
-                  prefix = ' ',
-                })
-              end
-            end,
-          })
+                if #diagnostics > 0 then
+                  vim.diagnostic.open_float(nil, {
+                    focusable = false,
+                    close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+                    border = 'rounded',
+                    source = 'always',
+                    prefix = ' ',
+                  })
+                end
+              end,
+            })
+          end
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
@@ -289,14 +291,23 @@ return {
         [vim.diagnostic.severity.INFO] = ' ',
       }
 
-      local config = {
+      local virtual_text = false
+      if vim.g.diagnostic_virtual_text then
+        ---@diagnostic disable-next-line: cast-local-type
         virtual_text = {
-          prefix = function(diagnostic)
-            return ' ' .. signs[diagnostic.severity] or signs[vim.diagnostic.severity.INFO]
+          format = function(_)
+            return ''
           end,
-          spacing = 4,
-          suffix = ' ',
-        },
+          prefix = function(diagnostic)
+            return '' .. signs[diagnostic.severity] or signs[vim.diagnostic.severity.INFO]
+          end,
+          spacing = 0,
+          suffix = '',
+        }
+      end
+
+      local config = {
+        virtual_text = virtual_text,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = '',

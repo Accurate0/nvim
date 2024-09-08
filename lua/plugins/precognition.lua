@@ -3,7 +3,7 @@ return {
   {
     'tris203/precognition.nvim',
     opts = {
-      startVisible = true,
+      startVisible = false,
       showBlankVirtLine = false,
     },
     config = function(_, opts)
