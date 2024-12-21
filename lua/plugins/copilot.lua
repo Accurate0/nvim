@@ -3,7 +3,6 @@ return {
   {
     'zbirenbaum/copilot.lua',
     enabled = false,
-    event = 'InsertEnter',
     opts = {
       {
         suggestion = { enabled = false },
@@ -16,7 +15,9 @@ return {
     keys = {
       {
         '<leader>tc',
-        '<cmd>Copilot toggle<CR>',
+        function()
+          require('copilot.command').toggle { force = true }
+        end,
         desc = '[T]oggle [C]opilot',
       },
     },
@@ -33,6 +34,13 @@ return {
           f.notify(' ' .. data.message, 3, {})
         end
       end)
+
+      vim.api.nvim_create_autocmd({ 'VeryLazy' }, {
+        callback = function()
+          require('copilot.command').detach()
+        end,
+        once = true,
+      })
     end,
   },
   {

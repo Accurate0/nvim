@@ -21,4 +21,15 @@ return {
     lazy = false,
     priority = 1000,
   },
+  {
+    'vague2k/vague.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('vague').setup {
+        -- optional configuration here
+      }
+    end,
+  },
+  { 'fcancelinha/nordern.nvim', branch = 'master', priority = 1000 },
 }

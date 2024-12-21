@@ -115,6 +115,24 @@ return {
       })
 
       local servers = {
+        emmet_rs = {
+          init_options = {
+            userLanguages = {
+              eelixir = 'html-eex',
+              eruby = 'erb',
+              rust = 'html',
+            },
+          },
+          default_config = {
+            cmd = { 'emmet-ls', '--stdio' },
+            filetypes = { 'rust' },
+            root_dir = function(fname)
+              return lspconfig.util.find_git_ancestor(fname)
+            end,
+            settings = {},
+          },
+        },
+        ['typst-lsp'] = {},
         gopls = {},
         tsserver = {},
         ['eslint-lsp'] = {},
