@@ -40,7 +40,8 @@ return {
         local persisted = require 'persisted'
         local sessions = persisted.list()
         local db = require('session').get_database()
-        local session_counts_db = db:eval 'SELECT * FROM sessions'
+        local session_counts_result = db:eval 'SELECT * FROM sessions'
+        local session_counts_db = type(session_counts_result) == "boolean" and {} or session_counts_result
         local session_counts = {}
         for _, value in pairs(session_counts_db) do
           session_counts[value.name] = value.load_count
@@ -127,7 +128,7 @@ return {
         end
         local cd_cmd = (autocd and ' | cd %:p:h' or '')
         local file_button_el =
-          dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
+            dashboard.button(sc, ico_txt .. short_fn, '<cmd>e ' .. fn .. cd_cmd .. ' <CR>')
         local fn_start = short_fn:match '.*[/\\]'
         if fn_start ~= nil then
           table.insert(fb_hl, { 'Comment', #ico_txt - 2, #fn_start + #ico_txt })
@@ -141,7 +142,7 @@ return {
       local mru_opts = {
         ignore = function(path, ext)
           return (string.find(path, 'COMMIT_EDITMSG'))
-            or (vim.tbl_contains(default_mru_ignore, ext))
+              or (vim.tbl_contains(default_mru_ignore, ext))
         end,
         autocd = false,
       }
