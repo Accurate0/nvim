@@ -2,10 +2,10 @@
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
+    -- enabled = false,
     main = 'ibl',
     opts = {
-      indent = { highlight = { 'Comment' } },
+      -- indent = { highlight = { 'Comment' } },
     },
     config = function(_, opts)
       require('ibl').setup(opts)
