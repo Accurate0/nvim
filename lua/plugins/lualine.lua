@@ -3,6 +3,16 @@ return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'stevearc/overseer.nvim' },
   config = function()
+    local function check_if_ssh()
+      local is_ssh = os.getenv('SSH_CLIENT') or os.getenv('SSH_TTY')
+      if is_ssh then
+        return [[ssh]]
+      end
+
+      return [[]]
+    end
+
+
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -16,8 +26,8 @@ return {
         lualine_c = {
           {
             'filename',
-            file_status = true, -- displays file status (readonly status, modified status)
-            path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+            file_status = true,
+            path = 1,
           },
         },
         lualine_x = {
@@ -30,6 +40,7 @@ return {
             symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
           },
           'filetype',
+          check_if_ssh
         },
         lualine_y = { 'progress' },
         lualine_z = { { 'location', separator = { right = '' } } },
