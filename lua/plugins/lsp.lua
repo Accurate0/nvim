@@ -218,6 +218,9 @@ return {
             },
           },
         },
+       jinja_lsp = {
+          filetypes = { "jinja", "html" },
+        },
       }
 
       require('mason').setup()
