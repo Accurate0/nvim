@@ -63,6 +63,12 @@ return {
           map('<leader>D', require('telescope.builtin').lsp_document_symbols, '[D]ocument Symbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          vim.keymap.set(
+            'v',
+            '<leader>ca',
+            vim.lsp.buf.code_action,
+            { buffer = event.buf, desc = 'LSP: [C]ode [A]action' }
+          )
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
@@ -218,8 +224,8 @@ return {
             },
           },
         },
-       jinja_lsp = {
-          filetypes = { "jinja", "html" },
+        jinja_lsp = {
+          filetypes = { 'jinja', 'html' },
         },
       }
 

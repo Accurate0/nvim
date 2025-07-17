@@ -25,7 +25,7 @@ return {
       require('copilot').setup(opts)
       local f = require 'fidget'
 
-      require('copilot.api').register_status_notification_handler(function(data)
+      require('copilot.status').register_status_notification_handler(function(data)
         if vim.fn.mode() == 'i' and data.status == 'InProgress' then
           f.notify(' Thinking...', 2, {})
         end
@@ -35,12 +35,12 @@ return {
         end
       end)
 
-      vim.api.nvim_create_autocmd({ 'VeryLazy' }, {
-        callback = function()
-          require('copilot.command').detach()
-        end,
-        once = true,
-      })
+      -- vim.api.nvim_create_autocmd({ 'VeryLazy' }, {
+      --   callback = function()
+      --     require('copilot.command').detach()
+      --   end,
+      --   once = true,
+      -- })
     end,
   },
   {
