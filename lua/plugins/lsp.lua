@@ -152,8 +152,10 @@ return {
                   enable = true,
                 },
               },
+              checkOnSave = true,
               check = {
                 command = 'clippy',
+                extraArgs = { '--all-targets', '--all-features' },
               },
             },
           },
@@ -269,6 +271,14 @@ return {
         },
       }
 
+      -- rust-analyzer is installed via rustup, not mason; merge our settings
+      -- into the defaults that nvim-lspconfig auto-loads via vim.lsp.config.
+      vim.lsp.config('rust_analyzer', {
+        capabilities = capabilities,
+        settings = (servers.rust_analyzer or {}).settings,
+      })
+      vim.lsp.enable('rust_analyzer')
+
       vim.o.foldcolumn = '0'
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
@@ -358,12 +368,7 @@ return {
 
       vim.diagnostic.config(config)
 
-      vim.lsp.handlers['textDocument/hover'] =
-        vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
-      vim.lsp.handlers['textDocument/signatureHelp'] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
-      vim.lsp.handlers['textDocument/publishDiagnostics'] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, config)
+      vim.o.winborder = 'rounded'
     end,
   },
 }
