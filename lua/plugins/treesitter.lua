@@ -15,14 +15,17 @@ return {
         'vim',
         'vimdoc',
         'rust',
+        'yaml',
+        'json',
+        'gitcommit'
       }
 
       local alreadyInstalled = require('nvim-treesitter.config').get_installed()
       local parsersToInstall = vim.iter(ensureInstalled)
-        :filter(function(parser)
-          return not vim.tbl_contains(alreadyInstalled, parser)
-        end)
-        :totable()
+          :filter(function(parser)
+            return not vim.tbl_contains(alreadyInstalled, parser)
+          end)
+          :totable()
 
       if #parsersToInstall > 0 then
         require('nvim-treesitter').install(parsersToInstall)
