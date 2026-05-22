@@ -154,8 +154,8 @@ return {
               },
               checkOnSave = true,
               check = {
-                command = 'clippy',
-                extraArgs = { '--all-targets', '--all-features' },
+                -- command = 'clippy',
+                -- extraArgs = { '--all-targets', '--all-features' },
               },
             },
           },
@@ -277,7 +277,7 @@ return {
         capabilities = capabilities,
         settings = (servers.rust_analyzer or {}).settings,
       })
-      vim.lsp.enable('rust_analyzer')
+      vim.lsp.enable 'rust_analyzer'
 
       vim.o.foldcolumn = '0'
       vim.o.foldlevel = 99
