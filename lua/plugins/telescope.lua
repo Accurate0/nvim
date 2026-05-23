@@ -28,8 +28,10 @@ return {
       table.insert(vimgrep_arguments, '!**/.git/*')
 
       require('telescope').setup {
+        defaults = {
+          vimgrep_arguments = vimgrep_arguments,
+        },
         pickers = {
-          defaults = { vimgrep_arguments = vimgrep_arguments },
           colorscheme = { enable_preview = true },
           find_files = {
             hidden = true,
@@ -63,6 +65,7 @@ return {
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'frecency')
       pcall(require('telescope').load_extension, 'persisted')
+
 
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })

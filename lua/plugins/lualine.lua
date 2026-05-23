@@ -4,14 +4,13 @@ return {
   dependencies = { 'stevearc/overseer.nvim' },
   config = function()
     local function check_if_ssh()
-      local is_ssh = os.getenv('SSH_CLIENT') or os.getenv('SSH_TTY')
+      local is_ssh = os.getenv 'SSH_CLIENT' or os.getenv 'SSH_TTY'
       if is_ssh then
         return [[ssh]]
       end
 
       return [[]]
     end
-
 
     require('lualine').setup {
       options = {
@@ -40,7 +39,7 @@ return {
             symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
           },
           'filetype',
-          check_if_ssh
+          check_if_ssh,
         },
         lualine_y = { 'progress' },
         lualine_z = { { 'location', separator = { right = '' } } },

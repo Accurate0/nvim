@@ -3,93 +3,17 @@ return {
   {
     'goolord/alpha-nvim',
     dependencies = {
-      'kkharji/sqlite.lua',
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
-      'olimorris/persisted.nvim',
     },
     config = function()
       local dashboard = require 'alpha.themes.dashboard'
       local cdir = vim.fn.getcwd()
       local if_nil = vim.F.if_nil
-      local chars = require('chars').glyphs
-
       local nvim_web_devicons = {
         enabled = true,
         highlight = true,
       }
-
-      local function splice(tbl, start, length)
-        length = length or 1
-        start = start or 1
-        local endd = start + length
-        local spliced = {}
-        local remainder = {}
-        for i, elt in ipairs(tbl) do
-          if i < start or i >= endd then
-            table.insert(spliced, elt)
-          else
-            table.insert(remainder, elt)
-          end
-        end
-        return spliced, remainder
-      end
-
-      local function get_session_list()
-        local group = { type = 'group', opts = { spacing = 0 }, val = {} }
-        local persisted = require 'persisted'
-        local sessions = persisted.list()
-        local db = require('session').get_database()
-        local session_counts_result = db:eval 'SELECT * FROM sessions'
-        local session_counts_db = type(session_counts_result) == "boolean" and {} or session_counts_result
-        local session_counts = {}
-        for _, value in pairs(session_counts_db) do
-          session_counts[value.name] = value.load_count
-        end
-
-        table.sort(sessions, function(s1, s2)
-          local s1_count = pcall(function()
-            return session_counts[s1.name]
-          end)
-
-          local s2_count = pcall(function()
-            return session_counts[s2.name]
-          end)
-
-          if s1_count and s2_count then
-            return (session_counts[s1.name] or 0) > (session_counts[s2.name] or 0)
-          end
-
-          if not s2_count then
-            return true
-          end
-
-          if not s1_count then
-            return false
-          end
-
-          return false
-        end)
-
-        local _, remainder = splice(sessions, 1, 8)
-
-        for i, session in pairs(remainder) do
-          local initial_char = chars[math.random(#chars)]
-          local button_text = initial_char .. '  ' .. session.name
-          local button = dashboard.button(
-            string.char(96 + i),
-            button_text,
-            '<cmd>SessionLoadFromFile ' .. session.file_path .. '<cr>'
-          )
-
-          local last_part = button_text:match '.*[/\\]'
-
-          button.opts.hl = { { 'Comment', 2, #last_part } }
-          table.insert(group.val, button)
-        end
-
-        return group
-      end
 
       local function get_extension(fn)
         local match = fn:match '^.+(%..+)$'
@@ -234,21 +158,6 @@ return {
               return { mru(0, cdir) }
             end,
             opts = { shrink_margin = false },
-          },
-          { type = 'padding', val = 1 },
-          {
-            type = 'text',
-            val = 'Frequent sessions',
-            opts = {
-              hl = 'Title',
-              position = 'center',
-            },
-          },
-          {
-            type = 'group',
-            val = function()
-              return { get_session_list() }
-            end,
           },
         },
       }
