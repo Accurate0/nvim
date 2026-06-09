@@ -277,6 +277,13 @@ return {
         capabilities = capabilities,
         settings = (servers.rust_analyzer or {}).settings,
       })
+      vim.lsp.config('yamlls', {
+        settings = {
+          yaml = {
+            customTags = { '!include scalar' },
+          },
+        },
+      })
       vim.lsp.enable 'rust_analyzer'
 
       vim.o.foldcolumn = '0'
