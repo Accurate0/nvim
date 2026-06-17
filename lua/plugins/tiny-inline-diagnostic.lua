@@ -6,7 +6,7 @@ return {
     signs = {
       left = ' ',
       right = ' ',
-      diag = ' ●',
+      diag = '●',
       arrow = '    ',
       up_arrow = '    ',
       vertical = ' │',
