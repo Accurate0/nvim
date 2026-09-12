@@ -4,6 +4,7 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
+      'folke/neoconf.nvim',
       {
         'kevinhwang91/nvim-ufo',
         dependencies = 'kevinhwang91/promise-async',
@@ -137,11 +138,11 @@ return {
             settings = {},
           },
         },
-        ['typst-lsp'] = {},
+        tinymist = {},
         gopls = {},
-        tsserver = {},
-        ['eslint-lsp'] = {},
-        ['svelte-language-server'] = {},
+        ts_ls = {},
+        eslint = {},
+        svelte = {},
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
@@ -175,8 +176,6 @@ return {
           },
           filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
         },
-        ['clang-format'] = {},
-        checkmake = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -232,8 +231,18 @@ return {
 
       require('mason').setup()
 
-      local ensure_installed = vim.tbl_keys(servers or {})
+      -- `servers` is keyed by lspconfig name; mason wants package names.
+      local lspconfig_to_package =
+        require('mason-lspconfig.mappings').get_mason_map().lspconfig_to_package
+      local ensure_installed = {}
+      for server_name in pairs(servers) do
+        local package_name = lspconfig_to_package[server_name]
+        if package_name then
+          table.insert(ensure_installed, package_name)
+        end
+      end
       vim.list_extend(ensure_installed, {
+        'clang-format',
         'stylua',
         'protolint',
         'checkmake',
