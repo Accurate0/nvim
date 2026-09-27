@@ -161,6 +161,7 @@ return {
           },
         },
         dockerls = {},
+        helm_ls = {},
         ['terraform-ls'] = {},
         clangd = {
           cmd = {

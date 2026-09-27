@@ -27,6 +27,7 @@ require 'options'
 require 'keymap'
 require 'autocmd'
 require 'ansible'
+require 'helm'
 -- fuck my life
 vim.cmd.colorscheme 'catppuccin-mocha'
 -- vim.cmd.colorscheme 'mellow'

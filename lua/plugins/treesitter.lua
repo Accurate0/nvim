@@ -17,7 +17,8 @@ return {
         'rust',
         'yaml',
         'json',
-        'gitcommit'
+        'gitcommit',
+        'helm',
       }
 
       local alreadyInstalled = require('nvim-treesitter.config').get_installed()
