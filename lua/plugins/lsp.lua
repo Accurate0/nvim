@@ -162,7 +162,7 @@ return {
         },
         dockerls = {},
         helm_ls = {},
-        ['terraform-ls'] = {},
+        terraformls = {},
         clangd = {
           cmd = {
             'clangd',
@@ -189,7 +189,7 @@ return {
             },
           },
         },
-        ['asm-lsp'] = {},
+        asm_lsp = {},
         cssls = {},
         tailwindcss = {},
         prismals = {},

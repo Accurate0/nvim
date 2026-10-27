@@ -125,7 +125,18 @@ return {
         }
       end
 
-      local fortune = vim.fn.system { 'fortune', '-a', '-s', '-n', '50' }
+      -- Homebrew's BSD fortune ships without the offensive db, so `-a` fails
+      -- on macOS; fall back to the default set.
+      local fortune = ''
+      if vim.fn.executable 'fortune' == 1 then
+        fortune = vim.fn.system { 'fortune', '-a', '-s', '-n', '50' }
+        if vim.v.shell_error ~= 0 then
+          fortune = vim.fn.system { 'fortune', '-s', '-n', '50' }
+        end
+        if vim.v.shell_error ~= 0 then
+          fortune = ''
+        end
+      end
       local split_fortune = {}
       for line in fortune:gmatch '[^\n]+' do
         table.insert(split_fortune, line)
