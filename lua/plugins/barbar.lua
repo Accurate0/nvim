@@ -1,3 +1,7 @@
+local key = function(k)
+  return vim.fn.has 'mac' == 1 and '<leader>' .. k or '<A-' .. k .. '>'
+end
+
 ---@type LazySpec
 return {
   {
@@ -18,17 +22,17 @@ return {
     event = 'BufEnter',
     keys = {
       {
-        '<A-1>',
+        key '1',
         '<Cmd>BufferPrevious<CR>',
         desc = 'Previous Tab',
       },
       {
-        '<A-2>',
+        key '2',
         '<Cmd>BufferNext<CR>',
         desc = 'Next Tab',
       },
       {
-        '<A-w>',
+        key 'w',
         '<Cmd>BufferClose<CR>',
         desc = 'Close Tab',
       },
